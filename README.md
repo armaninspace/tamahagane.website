@@ -8,7 +8,7 @@ The name HRocket is a play on the venerable portable typewriter the Hermes Rocke
 1. We should have a bin folder with has bash scripts that wrap the top level R code
 1. The user as part of the install instructions will be required to add bin to the path
 1. Scripts that we should have in the bin folder:
-  *. bin/hrmk -- this is the make file which will run the build process
-  *. bin/hrclean -- this will delete any cache files
+    *. bin/hrmk -- this is the make file which will run the build process
+    *. bin/hrclean -- this will delete any cache files
   
 
