@@ -13,3 +13,7 @@ The name HRocket is a play on the venerable portable typewriter the Hermes Rocke
 1. HRocket can operates in two different modes:
     1. monolithic-mode (perhaps we can find a better word) -- in this mode the published HTML files are under the same directory structure as the HRocket root folder
     1. separate-mode and this is the preferred mode, where the HTML generation directory is outside the HRocket folder 
+1. Charting should be done using Plot.ly and ggplot
+1. HRocket will support code embedding from Bash, C, C++, Java, Python, and R -- later we will add support for Scala, Clojure, and other languages
+1. Each theme will be in a self-contained folder with a unique name
+1. The theme folder will be in a folder called themes
