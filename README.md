@@ -17,3 +17,4 @@ The name HRocket is a play on the venerable portable typewriter the Hermes Rocke
 1. HRocket will support code embedding from Bash, C, C++, Java, Python, and R -- later we will add support for Scala, Clojure, and other languages
 1. Each theme will be in a self-contained folder with a unique name
 1. The theme folder will be in a folder called themes
+1. The bootstrap theme will be used to build the first theme
