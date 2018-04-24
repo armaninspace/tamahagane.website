@@ -1,50 +1,61 @@
-source("./libs/plugin-rmarkdown.R")
 library(configr)
 library(whisker)
 library(markdown)
 library(xml2)
 library(yaml)
 
-#get configration from config
-tomlConfig.list <- read.config("config.toml")
-
 structureChanged <- FALSE
-
 #argument for rebuild
 args = commandArgs(trailingOnly=TRUE)
+
+scriptLocation <- ''
+BuildPath <- ''
+
 if (length(args) > 0) {
+  scriptLocation <- args[1]
+  source(paste(scriptLocation,"/../libs/plugin-rmarkdown.R", sep = ""))
+  #get configration from config
+  tomlConfig.list <- read.config(paste(scriptLocation,"/../config.toml", sep = ""))
   
-  if (args[1] == "build-clean") {
-    if (dir.exists("./public")) {
+  if (tomlConfig.list$BuilPath != 'ROOT') {
+    BuildPath <- tomlConfig.list$BuilPath
+  } else {
+    BuildPath <- paste(scriptLocation,"/..", sep = "") 
+  }
+  
+  if (args[2] == "build-clean") {
+    if (dir.exists(paste(BuildPath,"/static", sep = ""))) {
       buildClean <- TRUE
-      unlink("./public/content", recursive=TRUE)
-      unlink("./public/static", recursive=TRUE)
-      file.remove("./public/index.html")
+      unlink(paste(BuildPath,"/static", sep = ""), recursive=TRUE)
+      unlink(paste(BuildPath,"/content", sep = ""), recursive=TRUE)
+      file.remove(paste(BuildPath,"/index.html", sep = ""))
     }
   } else {
-    stop("Argument for regenerate everything not valid use 'build-clean' insted.", call.=FALSE)
+    #stop("Argument for regenerate everything not valid use 'build-clean' insted.", call.=FALSE)
   }
 }
 
 # path to theme statis files
-theme <- paste("./themes/", tomlConfig.list$theme, sep = "")
+theme <- paste(scriptLocation,"/../themes/", tomlConfig.list$theme, sep = "")
 theme.static.folder <- paste(theme, "/static", sep = "")
 
+
+
 #path public site 
-public.folder <- "./public"
+#public.folder <- "./public"
 
 # create public directory if not exist
-dir.create(public.folder, showWarnings = FALSE)
+#dir.create(public.folder, showWarnings = FALSE)
 
 # copy themes static file in public directory
-if (!dir.exists(paste(public.folder,"/static"))) {
-  file.copy(theme.static.folder, public.folder, overwrite = TRUE, recursive=TRUE)
+if (!dir.exists(paste(BuildPath,"/static", sep = ""))) {
+  file.copy(theme.static.folder, paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)
 }
 
-if (!file.exists(paste(public.folder,"/index.html", sep = ""))) {
+if (!file.exists(paste(BuildPath,"/index.html", sep = ""))) {
   structureChanged <- TRUE
   #create Index file
-  markdownIndexOutput <- markDownReader("index.Rmd", page = FALSE, post = FALSE, index = TRUE, blogs = FALSE)
+  markdownIndexOutput <- markDownReader(BuildPath, scriptLocation ,"index.Rmd", page = FALSE, post = FALSE, index = TRUE, blogs = FALSE)
   pageTemplate <- readLines(paste(theme, "/templates/index.mustache", sep = ""))
   
   
@@ -60,23 +71,25 @@ if (!file.exists(paste(public.folder,"/index.html", sep = ""))) {
   
   writeLines(
     whisker.render(pageTemplate, data),
-    paste(public.folder, "/index.html", sep = "")
+    paste(BuildPath, "/index.html", sep = "")
   )
   
 }
 
+
 # create static pages
-pages <- list.files("./content/pages")
+pages <- list.files(paste(scriptLocation, "/../src/content/pages", sep = "" ))
+
 
 # create directory for pages if not exist
-dir.create(paste(public.folder, "/content", sep = ""), showWarnings = FALSE)
-dir.create(paste(public.folder, "/content/pages", sep = ""), showWarnings = FALSE)
+dir.create(paste(BuildPath, "/content", sep = ""), showWarnings = FALSE)
+dir.create(paste(BuildPath, "/content/pages", sep = ""), showWarnings = FALSE)
 
 for (i in 1:length(pages)) {
   rawFileName <- strsplit(pages[[i]], "[.]")[[1]][[1]]
-  if (!file.exists(paste(public.folder, "/content/pages/", rawFileName, "/index.html", sep = ""))) {
+  if (!file.exists(paste(BuildPath, "/content/pages/", rawFileName, "/index.html", sep = ""))) {
     structureChanged <- TRUE
-    output <- markDownReader(pages[[i]], page = TRUE, post = FALSE, index = FALSE, blogs=FALSE)
+    output <- markDownReader(BuildPath,scriptLocation, pages[[i]], page = TRUE, post = FALSE, index = FALSE, blogs=FALSE)
     
     pageTemplate <- readLines(paste(theme, "/templates/page.mustache", sep = ""))
     
@@ -91,26 +104,25 @@ for (i in 1:length(pages)) {
     print(paste("Creating page ", rawFileName, sep = ""))
     writeLines(
       whisker.render(pageTemplate, data),
-      paste(public.folder, "/content/pages/", rawFileName, "/index.html", sep = ""))
+      paste(BuildPath, "/content/pages/", rawFileName, "/index.html", sep = ""))
   }
   
 }
 
-
 # create static posts
-posts <- list.files("./content/posts")
+posts <- list.files(paste(scriptLocation,"/../src/content/posts", sep = ""))
 
 # create directory for posts if not exist
-dir.create(paste(public.folder, "/content", sep = ""), showWarnings = FALSE)
-dir.create(paste(public.folder, "/content/posts", sep = ""), showWarnings = FALSE)
+dir.create(paste(BuildPath, "/content", sep = ""), showWarnings = FALSE)
+dir.create(paste(BuildPath, "/content/posts", sep = ""), showWarnings = FALSE)
 
 for (i in 1:length(posts)) {
   rawFileName <- strsplit(posts[[i]], "[.]")[[1]][[1]]
-  if (!file.exists(paste(public.folder, "/content/posts/", rawFileName, "/index.html", sep = ""))) {
+  if (!file.exists(paste(BuildPath, "/content/posts/", rawFileName, "/index.html", sep = ""))) {
     structureChanged <- TRUE
-    output <- markDownReader(posts[[i]], page = FALSE, post = TRUE, index = FALSE, blogs = FALSE)
+    output <- markDownReader(BuildPath, scriptLocation ,posts[[i]], page = FALSE, post = TRUE, index = FALSE, blogs = FALSE)
     postTemplate <- readLines(paste(theme, "/templates/post.mustache", sep = ""))
-    postsYamlHeader <- readRMDyamlHeaders(paste("./content/posts/", posts[[i]], sep = ""), rawFileName)
+    postsYamlHeader <- readRMDyamlHeaders(paste(scriptLocation, "/../src/content/posts/", posts[[i]], sep = ""), rawFileName)
     
     data <- list(siteTitle = tomlConfig.list$title
                   , socialMedia = tomlConfig.list$socialMedia
@@ -126,7 +138,7 @@ for (i in 1:length(posts)) {
     print(paste("Creaing post ", rawFileName, sep = ""))
     writeLines(
       whisker.render(postTemplate, data),
-      paste(public.folder, "/content/posts/", rawFileName, "/index.html", sep = ""))
+      paste(BuildPath, "/content/posts/", rawFileName, "/index.html", sep = ""))
   } 
 }
 
@@ -135,7 +147,7 @@ if (structureChanged) {
   # all posts by title and date
   print("Creating blogs page")
   
-  postsRMDs <- list.files("./content/posts")
+  postsRMDs <- list.files(paste(scriptLocation, "/../src/content/posts", sep = ""))
   allPosts <- data.frame(
     file=character(),
     title=character(),
@@ -148,7 +160,7 @@ if (structureChanged) {
   )
   for (i in 1:length(postsRMDs)) {
     rawFileName <- strsplit(postsRMDs[[i]], "[.]")[[1]][[1]]
-    postConfig <- readRMDyamlHeaders(paste("./content/posts/", postsRMDs[[i]], sep = ""), rawFileName)
+    postConfig <- readRMDyamlHeaders(paste(scriptLocation, "/../src/content/posts/", postsRMDs[[i]], sep = ""), rawFileName)
     #allPosts <- c(allPosts,postConfig )
     allPosts <- rbind(allPosts, as.data.frame( postConfig))
   }
@@ -173,9 +185,9 @@ if (structureChanged) {
   
   
   itemPerpage <- 10
-  if (file.exists("./content/blogs_list/blogs.Rmd")) {
-    blogsOutput <- markDownReader("blogs.Rmd", page = FALSE, post = FALSE, index = FALSE, blogs = TRUE)
-    blogYaml <- readRMDyamlHeaders("./content/blogs_list/blogs.Rmd", "blogs")
+  if (file.exists(paste(scriptLocation, "/../src/content/blogs_list/blogs.Rmd", sep = ""))) {
+    blogsOutput <- markDownReader(BuildPath, scriptLocation, "blogs.Rmd", page = FALSE, post = FALSE, index = FALSE, blogs = TRUE)
+    blogYaml <- readRMDyamlHeaders(paste(scriptLocation,"/../src/content/blogs_list/blogs.Rmd", sep = ""), "blogs")
     if (blogYaml$sortby == "title") {
       unpinnedPosts <- unpinnedPosts[order(unpinnedPosts$title, decreasing = FALSE),]
     } else {
@@ -214,14 +226,14 @@ if (structureChanged) {
                 , pager = pager
   )
   # create blogs directory if not exist
-  dir.create(paste(public.folder, "/content/pages/blogs", sep = ""), showWarnings = FALSE)
+  dir.create(paste(BuildPath, "/content/pages/blogs", sep = ""), showWarnings = FALSE)
   
   writeLines(
     whisker.render(postTemplate, data),
-    paste(public.folder, "/content/pages/blogs/index.html", sep = ""))
+    paste(BuildPath, "/content/pages/blogs/index.html", sep = ""))
   
 }
 
 if(!structureChanged){
-  print("No thing to update.")
+  print("Nothing to update.")
 }

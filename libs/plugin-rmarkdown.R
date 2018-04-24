@@ -1,30 +1,30 @@
 
 
-markDownReader <- function(fileName, pageToRead = FALSE, postToRead = FALSE, index = FALSE, blogs = FALSE) {
+markDownReader <- function(buildPath, scriptLocation, fileName, pageToRead = FALSE, postToRead = FALSE, index = FALSE, blogs = FALSE) {
   rawFileName <- strsplit(fileName, "[.]")[[1]][[1]]
   filePath <- ""
   outputPath <- ""
   
   if (pageToRead) {
-    filePath <- "./content/pages/"
-    outputPath <- paste("./public/content/pages/", rawFileName, sep = "")
+    filePath <- paste(scriptLocation,"/../src/content/pages/", sep = "")
+    outputPath <- paste(buildPath, "/content/pages/", rawFileName, sep = "")
     # create new directory for new page in public directory if not exist
     dir.create(outputPath, showWarnings = FALSE)
   }
   
   if (postToRead) {
-    filePath <- "./content/posts/"
-    outputPath <- paste("./public/content/posts/", rawFileName, sep = "")
+    filePath <- paste(scriptLocation,"/../src/content/posts/", sep = "")
+    outputPath <- paste(buildPath,"/content/posts/", rawFileName, sep = "")
     # create new directory for new post in public directory if not exist
     dir.create(outputPath, showWarnings = FALSE)
   }
   if (index) {
-    filePath <- "./"
-    outputPath <- "./public"
+    filePath <- paste(scriptLocation,"/../", sep = "")
+    outputPath <- buildPath
   }
   if (blogs) {
-    filePath <- "./content/blogs_list/"
-    outputPath <- paste("./public/content/pages/", rawFileName, sep = "")
+    filePath <- paste(scriptLocation,"/../src/content/blogs_list/", sep = "")
+    outputPath <- paste(buildPath, "/content/pages/", rawFileName, sep = "")
     # create new directory for blogs list page in public directory if not exist
     dir.create(outputPath, showWarnings = FALSE)
   }
@@ -87,10 +87,14 @@ markDownReader <- function(fileName, pageToRead = FALSE, postToRead = FALSE, ind
   libs <- list.files(outputDir_libs)
   for (i in 1:length(libs)) {
     if (libs[[i]] == "figure-html") {
-      dir.create(paste(outputPath, "/", rawFileName, "_files/", sep = ""), showWarnings = FALSE)
-      file.copy(paste(filePath, rawFileName, "_files/", libs[[i]], sep = ""), paste(outputPath, "/", rawFileName, "_files/", sep = ""), overwrite = TRUE, recursive = TRUE)
+      filesDIR <- paste(outputPath, "/", rawFileName, "_files/", sep = "")
+      figuresDIR <- paste(outputPath, "/", rawFileName, "_files/" , "figure-html", sep = "")
+      dir.create(filesDIR, showWarnings = FALSE)
+      #dir.create(figuresDIR, showWarnings = FALSE)
+      
+      file.copy(paste(filePath, rawFileName, "_files/", libs[[i]], sep = ""), filesDIR, overwrite = TRUE, recursive = TRUE)
     } else {
-      file.copy(paste(filePath, rawFileName, "_files/", libs[[i]], sep = ""), "./public/static", overwrite = TRUE, recursive = TRUE)
+      file.copy(paste(filePath, rawFileName, "_files/", libs[[i]], sep = ""), paste(buildPath, "/static",sep = ""), overwrite = TRUE, recursive = TRUE)
     }
   }
   unlink(outputDir_libs, recursive=TRUE)

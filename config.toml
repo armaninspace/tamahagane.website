@@ -1,6 +1,7 @@
 title = "Arman Anwar -- Lost in Space"
 theme = "hrocket_theme"
 disqusShortname = ""
+BuilPath = "ROOT"
 
 [socialMedia]
   gitHub = "https://github.com/armaninspace"
