@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+  padding-top: 15px;
+}
+.main-container {
+  max-width: 100% !important;
+}
+.page-header {
+  margin-bottom: 5px;
+}
+article div.author {
+  margin-bottom: 10px;
+}
+#header.fluid-row {
+  display: none;
+}
+.region-content {
+  padding-bottom: 15px;
+}
+.region-content .main-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.logo img {
+  /*height: 34px;
+  width: 34px;*/
+}
+.post-item-pinned .post-title {
+  background-image: url(../images/pin-icon.png);
+  background-repeat: no-repeat;
+  background-position: right 5px;
+  background-size: 18px;
+  padding-right: 25px;
+}

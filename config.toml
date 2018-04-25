@@ -1,26 +1,33 @@
-title = "Arman Anwar -- Lost in Space"
-theme = "hrocket_theme"
+siteName = "HRocket"
+theme = "HR_Bootstrap"
 disqusShortname = ""
-BuilPath = "ROOT"
-
-[socialMedia]
-  gitHub = "https://github.com/armaninspace"
-  linkedIn = "https://www.linkedin.com/in/arman-anwar-a107961/"
-  twitter = "https://twitter.com/armaninspace"
+BuilPath = "/var/www/static_site.com/public"
 
 
-[[dropDownMenu]]
+[[mainMenu]]
+  name = "GitHub"
+  url = "https://github.com/"
+[[mainMenu]]
+  name = "Linkedin"
+  url = "https://www.linkedin.com/"
+[[mainMenu]]
+  name = "Twitter"
+  url = "https://twitter.com/"
+[[mainMenu]]
   name = "About"
   url = "/content/pages/about"
-[[dropDownMenu]]
+[[mainMenu]]
   name = "Blogs"
   url = "/content/pages/blogs"
+
 
 [params]
     description = ""
     [params.logo]
-    url = "A-logo.svg"
-    width = 50
-    height = 50
-    alt = "Logo"
+      url = "logo.svg"
+      width = 50
+      height = 50
+      alt = "Logo"
+    [fav_icon]
+      url = "favicon.ico"
 

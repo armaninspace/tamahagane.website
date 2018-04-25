@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ siteName }}</title>
+
+  {{# headers }}
+    {{{ . }}}
+  {{/ headers }}
+
+  <link rel="shortcut icon" href="/static/images/{{fav_icon.url}}" type="image/vnd.microsoft.icon">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css" media="all">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body class="path-frontpage has-glyphicons">
+<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+  <header class="navbar navbar-default container" id="navbar" role="banner">
+    <div class="navbar-header">
+      <div class="region region-navigation">
+        <a class="logo navbar-btn pull-left" href="/" title="Home" rel="home">
+          <img src="/static/images/{{ logo.url }}" alt="Home">
+        </a>
+        <a class="name navbar-brand" href="/" title="Home" rel="home">{{ siteName }}</a>
+      </div>
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div id="navbar-collapse" class="navbar-collapse collapse">
+      <div class="region region-navigation-collapsible">
+        <nav role="navigation" aria-labelledby="block-bootstrap-main-menu-menu" id="block-bootstrap-main-menu">
+          <h2 class="sr-only" id="block-bootstrap-main-menu-menu">Main navigation</h2>
+          <ul class="menu menu--main nav navbar-nav">
+
+            {{# mainMenu }}
+              <li><a href="{{ url }}">{{ name }}</a></li>
+            {{/ mainMenu }}
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+      <div class="col-sm-12" role="heading">
+        <div class="region region-header">
+          <h1 class="page-header">{{ title }}</h1>
+        </div>
+      </div>
+      <section class="col-sm-12">
+        <a id="main-content"></a>
+        <div class="region region-content">
+          {{# content }}
+            {{{ . }}}
+          {{/content}}
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="footer container" role="contentinfo">
+    <div class="region region-footer">
+    </div>
+  </footer>
+</div>
+
+<!--Wrapper-->
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery-3.js"></script>
+
+</body>
+</html>
+

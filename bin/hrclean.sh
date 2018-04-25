@@ -2,4 +2,4 @@
 
 SLocation="`dirname \"$0\"`"
 
-Rscript $SLocation/../libs/hrocket.R $SLocation build-clean
+Rscript $SLocation/../R/hrocket.R $SLocation build-clean
