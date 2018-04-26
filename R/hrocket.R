@@ -85,7 +85,7 @@ if (!file.exists(paste(BuildPath,"/index.html", sep = ""))) {
                 , mainMenu = tomlConfig.list$mainMenu
                 , dropDownMenu = tomlConfig.list$dropDownMenu
                 , logo = tomlConfig.list$params$logo
-                , fav_icon = tomlConfig.list$params$fav_icon
+                , favIcon = tomlConfig.list$params$favIcon
                 , headers = markdownIndexOutput$header
                 , content = markdownIndexOutput$body
                 , title  = markdownIndexOutput$ptitle
@@ -126,7 +126,7 @@ for (i in 1:length(pages)) {
                  , mainMenu = tomlConfig.list$mainMenu
                  , dropDownMenu = tomlConfig.list$dropDownMenu
                  , logo = tomlConfig.list$params$logo
-                 , fav_icon = tomlConfig.list$params$fav_icon
+                 , favIcon = tomlConfig.list$params$favIcon
                  , headers = output$header
                  , content = output$body
                  , title = output$ptitle
@@ -170,7 +170,7 @@ for (i in 1:length(posts)) {
                  , dropDownMenu = tomlConfig.list$dropDownMenu
                  , disqusShortname = tomlConfig.list$disqusShortname
                  , logo = tomlConfig.list$params$logo
-                 , fav_icon = tomlConfig.list$params$fav_icon
+                 , favIcon = tomlConfig.list$params$favIcon
                  , headers = output$header
                  , content = output$body
                  , title = output$ptitle
@@ -277,7 +277,7 @@ if (structureChanged) {
                , mainMenu = tomlConfig.list$mainMenu
                , dropDownMenu = tomlConfig.list$dropDownMenu
                , logo = tomlConfig.list$params$logo
-               , fav_icon = tomlConfig.list$params$fav_icon
+               , favIcon = tomlConfig.list$params$favIcon
                , headers = blogsOutput$header
                , content = blogsOutput$body
                , title =   blogsOutput$ptitle

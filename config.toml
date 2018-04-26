@@ -28,6 +28,6 @@ BuilPath = "/var/www/static_site.com/public"
       width = 50
       height = 50
       alt = "Logo"
-    [fav_icon]
+    [params.favIcon]
       url = "favicon.ico"
 
