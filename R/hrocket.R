@@ -89,6 +89,8 @@ if (!file.exists(paste(BuildPath,"/index.html", sep = ""))) {
                 , headers = markdownIndexOutput$header
                 , content = markdownIndexOutput$body
                 , title  = markdownIndexOutput$ptitle
+                , publishDir  = tomlConfig.list$publishDir
+                , logoLink  = tomlConfig.list$logoLink
   )
   
   # Print some Log where is script running
@@ -130,6 +132,8 @@ for (i in 1:length(pages)) {
                  , headers = output$header
                  , content = output$body
                  , title = output$ptitle
+                 , publishDir  = tomlConfig.list$publishDir
+                 , logoLink  = tomlConfig.list$logoLink
     )
     
     # Print some Log where is script running
@@ -177,6 +181,8 @@ for (i in 1:length(posts)) {
                  , commentEnable = postsYamlHeader$commentEnable
                  , tags = strsplit(postsYamlHeader$tags, ",")[[1]]
                  , postDate = postsYamlHeader$date
+                 , publishDir  = tomlConfig.list$publishDir
+                 , logoLink  = tomlConfig.list$logoLink
     )
     
     # Print some Log where is script running
@@ -285,6 +291,8 @@ if (structureChanged) {
                , pinnedPost = finalPinnedPosts
                , upinnedPost = finalUnPinnedPosts
                , pager = pager
+               , publishDir  = tomlConfig.list$publishDir
+               , logoLink  = tomlConfig.list$logoLink
   )
   
   # create blogs directory if not exist
