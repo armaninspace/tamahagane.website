@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ siteName }} | {{ title }}</title>
+
+  {{# headers }}
+    {{{ . }}}
+  {{/ headers }}
+
+  <link rel="shortcut icon" href="/static/images/{{favIcon.url}}" type="image/vnd.microsoft.icon">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css" media="all">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+  <link rel="stylesheet" href="/static/css/fontawesome/css/fontawesome-all.min.css">
+</head>
+<body class="home blog mp6 customizer-styles-applied highlander-enabled highlander-light tablet-desktop">
+<div id="page" class="hfeed site" data-off-canvas-main-canvas="">
+  <div id="hero-header" class="site-hero-section">
+    <header id="master-head" class="site-header" role="banner">
+      <div class="inner">  
+        <div class="site-branding">
+          <a class="site-logo-link" href="/" title="Home" rel="home">
+            <img src="/static/images/{{ logo.url }}" alt="Home">
+          </a>
+          <h1 class="site-title"><a href="/" title="Home" rel="home">{{ siteName }}</a></h1>
+          <p class="site-description">Curabitur aliquet quam id dui posuere blandit aliquet quam id dui posuere blandit.</p>         
+        </div>
+        <nav class="jetpack-social-navigation jetpack-social-navigation-svg" role="navigation" aria-label="Social Links Menu">
+          <div class="menu-social-navigation-container">
+            <ul id="menu-social-navigation" class="menu">
+              <li id="" class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a href="https://github.com/"><i class="fab fa-github fa-1x"></i></a>
+              </li>
+              <li id="" class="menu-item menu-item-type-custom menu-item-object-custom">
+                 <a href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-1x"></i></a>
+              </li>
+              <li id="" class="menu-item menu-item-type-custom menu-item-object-custom ">
+                 <a href="https://twitter.com/"><i class="fab fa-twitter fa-1x"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>    
+    </header>
+  </div>
+  <nav role="navigation" class="main-navigation" id="site-navigation">
+    <div class="region region-navigation-collapsible">
+      <h2 class="sr-only" id="block-bootstrap-main-menu-menu">Main navigation</h2>
+        <ul id="primary-menu" class="menu nav-menu">
+          {{# mainMenu }}
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home">
+              <a href="{{ url }}">{{ name }}</a>
+            </li>
+          {{/ mainMenu }}
+        </ul>
+    </div>
+  </nav>
+
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+      <section class="col-sm-12">
+        <a id="main-content"></a>
+        <div class="region region-content">
+          {{# content }}
+            {{{ . }}}
+          {{/content}}
+          <div class="posts-list posts-list-pinned text-left">
+            <!--wrap single list item into a container-->
+            {{# pinnedPost }}
+              <article role="article" class="article is-promoted teaser clearfix  post-item-pinned">
+                <h2 class="post-title">
+                  <a href="/content/posts/{{ rawFileName }}" rel="bookmark"><span
+                          property="schema:name">{{ title }}</span></a>
+                </h2>
+                <footer>
+                  <div class="author">
+                    <span property="schema:dateCreated" content="{{ date }}">{{ date }}</span>
+                  </div>
+                </footer>
+                <div class="content">
+                  {{ teaser }}
+                  <div class="field field--label-above">
+                    <div class="field--label">Tags</div>
+                    <div class="field--items tags">
+                      {{# tags }} <span class="field--item tag">#{{{ . }}}</span> {{/tags}}
+                    </div>
+                  </div>
+                  <ul class="links inline list-inline">
+                    <li class="node-readmore"><a href="/content/posts/{{ rawFileName }}" rel="tag" title="{{ title }}"
+                                                 hreflang="en">Read more</a></li>
+                  </ul>
+                </div>
+
+              </article>
+            {{/pinnedPost}}
+          </div>
+          <div class="posts-list posts-list-unpinned text-left">
+            <!--wrap single list item into a container-->
+            {{# upinnedPost }}
+              <article role="article" class="article is-promoted teaser clearfix unpinned-item">
+                <h2>
+                  <a href="/content/posts/{{ rawFileName }}" rel="bookmark"><span
+                          property="schema:name">{{ title }}</span></a>
+                </h2>
+                <footer>
+                  <div class="author">
+                    <span property="schema:dateCreated" content="{{ date }}">{{ date }}</span>
+                  </div>
+                </footer>
+                <div class="content">
+                  {{ teaser }}
+                  <div class="field field--label-above">
+                    <div class="field--label">Tags</div>
+                    <div class="field--items tags">
+                      {{# tags }} <span class="field--item tag">#{{{ . }}}</span> {{/tags}}
+                    </div>
+                  </div>
+                  <ul class="links inline list-inline">
+                    <li class="node-readmore"><a href="/content/posts/{{ rawFileName }}" rel="tag" title="{{ title }}"
+                                                 hreflang="en">Read more</a></li>
+                  </ul>
+                </div>
+
+              </article>
+            {{/upinnedPost}}
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="footer container" role="contentinfo">
+    <div class="region region-footer">
+    </div>
+  </footer>
+</div>
+
+<!--Wrapper-->
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery-3.js"></script>
+
+</body>
+</html>
+
