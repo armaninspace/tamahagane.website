@@ -2,16 +2,18 @@ siteName = "HRocket"
 theme = "HR_Publisher"
 disqusShortname = ""
 BuilPath = "/var/www/static_site.com/public"
+publishDir = "/testhrocket"
+logoLink = "/testhrocket"
 
 [[mainMenu]]
   name = "Home"
-  url = "/"
+  url = "/testhrocket"
 [[mainMenu]]
   name = "About"
-  url = "/content/pages/about"
+  url = "/testhrocket/content/pages/about"
 [[mainMenu]]
   name = "Blogs"
-  url = "/content/pages/blogs"
+  url = "/testhrocket/content/pages/blogs"
 
 
 [params]
