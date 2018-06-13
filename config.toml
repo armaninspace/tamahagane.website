@@ -1,18 +1,11 @@
 siteName = "HRocket"
-theme = "HR_Bootstrap"
+theme = "HR_Publisher"
 disqusShortname = ""
 BuilPath = "/var/www/static_site.com/public"
 
-
 [[mainMenu]]
-  name = "GitHub"
-  url = "https://github.com/"
-[[mainMenu]]
-  name = "Linkedin"
-  url = "https://www.linkedin.com/"
-[[mainMenu]]
-  name = "Twitter"
-  url = "https://twitter.com/"
+  name = "Home"
+  url = "/"
 [[mainMenu]]
   name = "About"
   url = "/content/pages/about"
@@ -24,7 +17,7 @@ BuilPath = "/var/www/static_site.com/public"
 [params]
     description = ""
     [params.logo]
-      url = "logo.svg"
+      url = "logo.png"
       width = 50
       height = 50
       alt = "Logo"
