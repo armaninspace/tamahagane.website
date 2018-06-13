@@ -19,11 +19,11 @@ The name HRocket is a play on the venerable portable typewriter the Hermes Rocke
 1. The theme folder will be in a folder called themes
 1. The bootstrap theme will be used to build the first theme
 
+# Path Settings
 For resolving relative path issue user can adjust some configuration variables in config.toml as follow
 1) for a domain setup
 publishDir = ""
 logoLink = "/"
-
 [[mainMenu]]
   name = "Home"
   url = "/"
@@ -37,7 +37,6 @@ logoLink = "/"
 2) for github pages (when user's github page repo is "testhrocket")
 publishDir = "/testhrocket"
 logoLink = "/testhrocket"
-
 [[mainMenu]]
   name = "Home"
   url = "/testhrocket"
@@ -47,3 +46,4 @@ logoLink = "/testhrocket"
 [[mainMenu]]
   name = "Blogs"
   url = "/testhrocket/content/pages/blogs"
+
