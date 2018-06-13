@@ -19,31 +19,31 @@ The name HRocket is a play on the venerable portable typewriter the Hermes Rocke
 1. The theme folder will be in a folder called themes
 1. The bootstrap theme will be used to build the first theme
 
-# Path Settings
-For resolving relative path issue user can adjust some configuration variables in config.toml as follow
-1) for a domain setup
-publishDir = ""
-logoLink = "/"
-[[mainMenu]]
-  name = "Home"
-  url = "/"
-[[mainMenu]]
-  name = "About"
-  url = "/content/pages/about"
-[[mainMenu]]
-  name = "Blogs"
-  url = "/content/pages/blogs"
+## Path Settings
+For resolving relative path issue user can adjust some configuration variables in config.toml as follow<br />
+1) for a domain setup <br />
+publishDir = ""<br />
+logoLink = "/"<br />
+[[mainMenu]]<br />
+  name = "Home"<br />
+  url = "/"<br />
+[[mainMenu]]<br />
+  name = "About"<br />
+  url = "/content/pages/about"<br />
+[[mainMenu]]<br />
+  name = "Blogs"<br />
+  url = "/content/pages/blogs"<br />
 
-2) for github pages (when user's github page repo is "testhrocket")
-publishDir = "/testhrocket"
-logoLink = "/testhrocket"
-[[mainMenu]]
-  name = "Home"
-  url = "/testhrocket"
-[[mainMenu]]
-  name = "About"
-  url = "/testhrocket/content/pages/about"
-[[mainMenu]]
-  name = "Blogs"
-  url = "/testhrocket/content/pages/blogs"
+2) for github pages (when user's github page repo is "testhrocket")<br />
+publishDir = "/testhrocket"<br />
+logoLink = "/testhrocket"<br />
+[[mainMenu]]<br />
+  name = "Home"<br />
+  url = "/testhrocket"<br />
+[[mainMenu]]<br />
+  name = "About"<br />
+  url = "/testhrocket/content/pages/about"<br />
+[[mainMenu]]<br />
+  name = "Blogs"<br />
+  url = "/testhrocket/content/pages/blogs"<br />
 
