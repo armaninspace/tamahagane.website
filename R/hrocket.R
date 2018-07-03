@@ -156,6 +156,7 @@ dir.create(paste(BuildPath, "/content/posts", sep = ""), showWarnings = FALSE)
 
 for (i in 1:length(posts)) {
   rawFileName <- strsplit(posts[[i]], "[.]")[[1]][[1]]
+  
   if (!file.exists(paste(BuildPath, "/content/posts/", rawFileName, "/index.html", sep = ""))) {
     structureChanged <- TRUE
     
@@ -184,7 +185,7 @@ for (i in 1:length(posts)) {
                  , publishDir  = tomlConfig.list$publishDir
                  , logoLink  = tomlConfig.list$logoLink
     )
-    
+
     # Print some Log where is script running
     print(paste("Creaing post ", rawFileName, sep = ""))
     
@@ -248,6 +249,7 @@ if (structureChanged) {
     
     # Render blogs.RMD file
     blogsOutput <- markDownReader(BuildPath, HRroot, "blogs.Rmd", page = FALSE, post = FALSE, index = FALSE, blogs = TRUE)
+    
     # Get header configurations
     blogYaml <- readRMDyamlHeaders(paste(HRroot,"/src/content/blogs_list/blogs.Rmd", sep = ""), "blogs")
     
@@ -293,6 +295,7 @@ if (structureChanged) {
                , pager = pager
                , publishDir  = tomlConfig.list$publishDir
                , logoLink  = tomlConfig.list$logoLink
+               
   )
   
   # create blogs directory if not exist

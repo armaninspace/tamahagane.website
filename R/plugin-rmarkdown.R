@@ -40,10 +40,11 @@ markDownReader <- function(buildPath, HRroot, fileName, pageToRead = FALSE, post
     # create new directory for blogs list page in public directory if not exist
     dir.create(outputPath, showWarnings = FALSE)
   }
-  
+
   outputFile <- paste(filePath, rawFileName, ".html", sep = "")
-  outputDir_libs <- paste(filePath, rawFileName, "_files", sep = "")
   
+  outputDir_libs <- paste(filePath, rawFileName, "_files", sep = "")
+ 
   # Render RMD using rmarkdown
   rmarkdown::render(
     paste(filePath, fileName, sep = ""),

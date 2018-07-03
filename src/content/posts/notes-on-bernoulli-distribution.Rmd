@@ -1,0 +1,51 @@
+---
+title: "Notes on the Bernoulli distribution"
+date: "15.02.2018"
+teaser: "Bernoulli distribution describes an outcome of a single experiment with two possible outcomes (success or failure): $X=1$ if an experiment was successfull, $X=0$ if it was not.
+
+Parameter $p$ -- probability of a success."
+pinned: TRUE
+commentEnable: FALSE
+tags: "Bernoulli, Statistics, Probability, Elementary"
+---
+
+Bernoulli distribution describes an outcome of a single experiment with two possible outcomes (success or failure): $X=1$ if an experiment was successfull, $X=0$ if it was not.
+
+Parameter: $p$ -- probability of a success.
+
+Values: $\{0,1\}.$
+
+Probability mass function:
+$$
+P(X=1)=p, \ P(X=0)=1-p.
+$$
+
+Moment generating function:
+$$
+M(t)=1-p+pe^t
+$$
+
+
+### Proof 
+
+$$
+M(t)=Ee^{tX}=e^t\cdot P(X=1)+e^0\cdot P(X=0)=pe^t+1-p
+$$
+
+
+All moments:
+$$
+EX^n=p, \ n\geq 1.
+$$
+
+### Proof
+
+Observe that $X^n=X,$ for $n\geq 1.$ Further,
+$$
+EX=1\cdot P(X=1)+0\cdot P(X=0)=p+0=p
+$$
+
+
+Expectation: $EX=p$
+
+Variance: $V(X)=p(1-p)$

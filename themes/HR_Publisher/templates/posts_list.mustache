@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="{{ publishDir }}/static/css/styles.css" media="all">
   <link rel="stylesheet" href="{{ publishDir }}/static/css/responsive.css">
   <link rel="stylesheet" href="{{ publishDir }}/static/css/fontawesome/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="{{ publishDir }}/static/cpager/css/cPager.css" media="all">
+    <script type="text/javascript" src="{{ publishDir }}/static/cpager/js/cPager.js"></script>
 </head>
 <body class="home blog mp6 customizer-styles-applied highlander-enabled highlander-light tablet-desktop">
 <div id="page" class="hfeed site" data-off-canvas-main-canvas="">
@@ -27,19 +29,19 @@
             <img src="{{ publishDir }}/static/images/{{ logo.url }}" alt="Home">
           </a>
           <h1 class="site-title"><a href="{{ logoLink }}" title="Home" rel="home">{{ siteName }}</a></h1>
-          <p class="site-description">Curabitur aliquet quam id dui posuere blandit aliquet quam id dui posuere blandit.</p>         
+                   
         </div>
         <nav class="jetpack-social-navigation jetpack-social-navigation-svg" role="navigation" aria-label="Social Links Menu">
           <div class="menu-social-navigation-container">
             <ul id="menu-social-navigation" class="menu">
               <li id="" class="menu-item menu-item-type-custom menu-item-object-custom">
-                <a href="https://github.com/"><i class="fab fa-github fa-1x"></i></a>
+                <a href="https://github.com/armaninspace"><i class="fab fa-github fa-1x"></i></a>
               </li>
               <li id="" class="menu-item menu-item-type-custom menu-item-object-custom">
-                 <a href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-1x"></i></a>
+                 <a href="https://www.linkedin.com/in/arman-anwar-a107961"><i class="fab fa-linkedin fa-1x"></i></a>
               </li>
               <li id="" class="menu-item menu-item-type-custom menu-item-object-custom ">
-                 <a href="https://twitter.com/"><i class="fab fa-twitter fa-1x"></i></a>
+                 <a href="https://twitter.com/armaninspace"><i class="fab fa-twitter fa-1x"></i></a>
               </li>
             </ul>
           </div>
@@ -76,23 +78,15 @@
                   <a href="{{ publishDir }}/content/posts/{{ rawFileName }}" rel="bookmark"><span
                           property="schema:name">{{ title }}</span></a>
                 </h2>
-                <footer>
-                  <div class="author">
-                    <span property="schema:dateCreated" content="{{ date }}">{{ date }}</span>
-                  </div>
-                </footer>
+                
                 <div class="content">
                   {{ teaser }}
-                  <div class="field field--label-above">
-                    <div class="field--label">Tags</div>
+                  <div class="field field--label-above">                    
                     <div class="field--items tags">
-                      {{# tags }} <span class="field--item tag">#{{{ . }}}</span> {{/tags}}
+                      <i class="fas fa-folder-open"></i> {{# tags }} <span class="field--item tag"> #{{{ . }}}</span> {{/tags}}
                     </div>
                   </div>
-                  <ul class="links inline list-inline">
-                    <li class="node-readmore"><a href="{{ publishDir }}/content/posts/{{ rawFileName }}" rel="tag" title="{{ title }}"
-                                                 hreflang="en">Read more</a></li>
-                  </ul>
+                  
                 </div>
 
               </article>
@@ -106,11 +100,6 @@
                   <a href="{{ publishDir }}/content/posts/{{ rawFileName }}" rel="bookmark"><span
                           property="schema:name">{{ title }}</span></a>
                 </h2>
-                <footer>
-                  <div class="author">
-                    <span property="schema:dateCreated" content="{{ date }}">{{ date }}</span>
-                  </div>
-                </footer>
                 <div class="content">
                   {{ teaser }}
                   <div class="field field--label-above">
@@ -119,16 +108,15 @@
                       {{# tags }} <span class="field--item tag">#{{{ . }}}</span> {{/tags}}
                     </div>
                   </div>
-                  <ul class="links inline list-inline">
-                    <li class="node-readmore"><a href="{{ publishDir }}/content/posts/{{ rawFileName }}" rel="tag" title="{{ title }}"
-                                                 hreflang="en">Read more</a></li>
-                  </ul>
+                  
                 </div>
 
               </article>
             {{/upinnedPost}}
           </div>
-
+           
+              <div class="turn-page" id="pager"></div>
+		    
         </div>
       </section>
     </div>
@@ -142,7 +130,17 @@
 <!--Wrapper-->
 <script src="{{ publishDir }}/static/js/bootstrap.min.js"></script>
 <script src="{{ publishDir }}/static/js/jquery-3.js"></script>
-
+{{#pager}}
+  <script type="text/javascript">
+    $(document).ready(function() {    	
+      $(this).cPager({
+        pageSize: {{perPageItem}},
+        pageid: "pager",
+        itemClass: "unpinned-item"
+      });
+    });
+  </script>
+{{/pager}}
 </body>
 </html>
 

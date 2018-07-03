@@ -1,25 +1,21 @@
-siteName = "HRocket"
+siteName = "Tamahagane"
 theme = "HR_Publisher"
 disqusShortname = ""
-BuilPath = "/var/www/static_site.com/public"
-publishDir = "/testhrocket"
-logoLink = "/testhrocket"
+BuilPath = "/path-to-hrocket-directory/hrocket/docs"
+publishDir = ""
+logoLink = "/"
 
 [[mainMenu]]
   name = "Home"
-  url = "/testhrocket"
+  url = "/"
 [[mainMenu]]
   name = "About"
-  url = "/testhrocket/content/pages/about"
-[[mainMenu]]
-  name = "Blogs"
-  url = "/testhrocket/content/pages/blogs"
-
+  url = "/content/pages/about"
 
 [params]
     description = ""
     [params.logo]
-      url = "logo.png"
+      url = "logo.jpg"
       width = 50
       height = 50
       alt = "Logo"

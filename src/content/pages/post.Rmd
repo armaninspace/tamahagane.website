@@ -1,0 +1,10 @@
+---
+title: "Posts on Tamahagane"
+date: "15.02.2018"
+teaser: "Recent content in Posts on Tamahagane"
+pinned: FALSE
+commentEnable: FALSE
+tags: "Bernoulli, Statistics, Probability, Elementary"
+---
+
+Recent content in Posts on Tamahagane

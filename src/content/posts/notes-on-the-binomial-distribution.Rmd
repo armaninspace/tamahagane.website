@@ -1,0 +1,72 @@
+---
+title: "Notes on the Binomial distribution"
+date: "15.02.2018"
+teaser: "Binomial distribution describes the number of successes in a series of $n$ independent identical experiments: $X=k$ if exactly $k$ experiments out of $n$ were successfull, while others were not.
+
+Parameters: $n$ -- number of experiments, $p$ -- probability of a success in a single experiment."
+pinned: FALSE
+commentEnable: FALSE
+tags: "Binomial, Statistics, Probability, Elementary"
+---
+
+Binomial distribution describes the number of successes in a series of $n$ independent identical experiments: $X=k$ if exactly $k$ experiments out of $n$ were successfull, while others were not.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6A5EpqqDOdk" frameborder="0" allowfullscreen></iframe>
+
+Parameters: $n$ -- number of experiments, $p$ -- probability of a success in a single experiment.
+
+Values: $\{0,1,2,\ldots,n\}.$
+
+Probability mass function:
+$$
+P(X=k)={n\choose k}p^k(1-p)^{n-k}, \ k=0,1,2,\ldots,n.
+$$
+
+### Derivation
+
+Let $\xi_k,$ $k=1,2,\ldots,n,$  be the result of $k$-th experiment, i.e. $\xi_k=1$ if $k$-th experiment was successfull, and $\xi_k=0$ otherwise. Then 
+$$
+X=\xi_1+\xi_2+\ldots+\xi_n,
+$$
+By assumption, $\xi_1,\ldots,\xi_n$ are independent and each has a  Bernoulli distribution with parameter $p.$ Event $\{X=k\}$  means that exactly $k$ variables of $\xi_1\ldots,\xi_n$ equal to $1$ and others are equal to $0.$ There are ${n\choose k}$ possibilities to choose variables that are equal to $1.$ Each of them is $1$ with probability $p,$ other $n-k$ variables are $0$ each with probability $1-p.$
+
+
+Moment generating function:
+$$
+M(t)=(1-p+pe^t)^n
+$$
+
+
+### Proof
+
+$$
+M(t)=Ee^{t(\xi_1+\ldots+\xi_n)}=
+$$
+using independence
+$$
+=Ee^{t\xi_1}Ee^{t\xi_2}\ldots Ee^{t\xi_n}=(pe^t+1-p)^n
+$$
+
+
+Expectation: $EX=np$
+
+Variance: $V(X)=np(1-p)$
+
+### Derivation
+
+Expectation is the first derivative $M'(0).$ We have 
+$$
+M'(t)=n(pe^t+1-p)^{n-1}pe^t, \ EX=M'(0)=np.
+$$
+Second moment is the second derivative $M''(0).$ We have 
+$$
+M''(t)=n(n-1)(pe^t+1-p)^{n-1}p^2e^{2t}+n(pe^t+1-p)^{n-1}pe^t, $$
+$$
+ EX^2=M''(0)=n(n-1)p^2+np.
+$$
+Variance is 
+$$
+V(X)=EX^2-(EX)^2=n(n-1)p^2+np-n^2p^2=np(1-p)
+$$
+
+
