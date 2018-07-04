@@ -168,7 +168,17 @@ for (i in 1:length(posts)) {
     
     # Get post's header configurations
     postsYamlHeader <- readRMDyamlHeaders(paste(HRroot, "/src/content/posts/", posts[[i]], sep = ""), rawFileName)
-    
+    if(length(postsYamlHeader) < 8) {
+      stop('Please check your Posts Rmd files header there must be 6 parameters as follow 
+           ---
+           title: "Some text title"
+           date: "15.02.2018"
+           teaser: "Some text teaser"
+           pinned: TRUE
+           commentEnable: FALSE
+           tags: "plotly,interactive,plot"
+           ---')
+    }
     # prepare variables to send mustache template
     data <- list(siteName = tomlConfig.list$siteName
                  , mainMenu = tomlConfig.list$mainMenu
@@ -218,10 +228,12 @@ if (structureChanged) {
     stringsAsFactors=FALSE,
     tags = character()
   )
+  
+  blogYamlinfo <- readRMDyamlHeaders(paste(HRroot,"/src/content/blogs_list/blogs.Rmd", sep = ""), "blogs")
+  
   for (i in 1:length(postsRMDs)) {
     rawFileName <- strsplit(postsRMDs[[i]], "[.]")[[1]][[1]]
     postConfig <- readRMDyamlHeaders(paste(HRroot, "/src/content/posts/", postsRMDs[[i]], sep = ""), rawFileName)
-    #allPosts <- c(allPosts,postConfig )
     allPosts <- rbind(allPosts, as.data.frame( postConfig))
   }
   
@@ -239,6 +251,11 @@ if (structureChanged) {
   for (s in 1:length(tmp.pinned)) {
     finalPinnedPosts[[s]] <- as.list(tmp.pinned[[s]])
     finalPinnedPosts[[s]]$tags <- strsplit(finalPinnedPosts[[s]]$tags, ",")[[1]] 
+    if (blogYamlinfo$teaser == "full") {
+      output1 <- markDownReader1(BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalPinnedPosts[[s]]$rawFileName)
+      finalPinnedPosts[[s]]$teaser <- output1$body
+      finalPinnedPosts[[s]]$pheader <- output1$header
+    }
   }
   
   unpinnedPosts[] <- lapply(unpinnedPosts, as.character)
@@ -271,6 +288,11 @@ if (structureChanged) {
   for (s in 1:length(tmp.unpinned)) {
     finalUnPinnedPosts[[s]] <- as.list(tmp.unpinned[[s]])
     finalUnPinnedPosts[[s]]$tags <- strsplit(finalUnPinnedPosts[[s]]$tags, ",")[[1]]
+    if (blogYamlinfo$teaser == "full") {
+      output1 <- markDownReader1(BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalUnPinnedPosts[[s]]$rawFileName)
+      finalUnPinnedPosts[[s]]$teaser <- output1$body
+      finalUnPinnedPosts[[s]]$pheader <- output1$header
+    }
   }
   pager <- FALSE
   if (length(finalUnPinnedPosts) > itemPerpage) {

@@ -302,7 +302,7 @@ h6 {
 	clear: both;
 	margin-top: .875em;
 	margin-bottom: .875em;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif !important;
 	line-height: 1.1;
 	color: #333332;
 }
@@ -347,6 +347,8 @@ hr {
 
 p {
 	margin-bottom: .875em;
+	font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
 }
 
 ul,
@@ -3319,4 +3321,19 @@ h1.title {
 }
 .region-footer p {
 	text-align: center;
+}
+.posts-list .content #header {
+	display: none;
+}
+.posts-list .container-fluid.main-container{
+	padding-left: 0;
+	padding-right: 0;
+}
+.site-title a:hover {
+  text-decoration: none !important;  
+  color: #333332 !important;
+}
+.menu .menu-item a:hover {
+  text-decoration: none !important;
+  color: #00aadc !important;
 }

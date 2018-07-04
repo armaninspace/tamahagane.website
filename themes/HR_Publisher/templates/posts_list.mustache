@@ -73,14 +73,19 @@
           <div class="posts-list posts-list-pinned text-left">
             <!--wrap single list item into a container-->
             {{# pinnedPost }}
-              <article role="article" class="article is-promoted teaser clearfix  post-item-pinned">
+              <article role="article" class="article is-promoted teaser clearfix  post-item-pinned blog-list-items">
                 <h2 class="post-title">
                   <a href="{{ publishDir }}/content/posts/{{ rawFileName }}" rel="bookmark"><span
                           property="schema:name">{{ title }}</span></a>
                 </h2>
                 
                 <div class="content">
-                  {{ teaser }}
+                  {{# pheader }}
+                  {{{ . }}}
+                  {{/pheader}} 
+                  {{# teaser }}
+                  {{{ . }}}
+                  {{/teaser}}
                   <div class="field field--label-above">                    
                     <div class="field--items tags">
                       <i class="fas fa-folder-open"></i> {{# tags }} <span class="field--item tag"> #{{{ . }}}</span> {{/tags}}
@@ -95,13 +100,18 @@
           <div class="posts-list posts-list-unpinned text-left">
             <!--wrap single list item into a container-->
             {{# upinnedPost }}
-              <article role="article" class="article is-promoted teaser clearfix unpinned-item">
+              <article role="article" class="article is-promoted teaser clearfix unpinned-item blog-list-items">
                 <h2>
                   <a href="{{ publishDir }}/content/posts/{{ rawFileName }}" rel="bookmark"><span
                           property="schema:name">{{ title }}</span></a>
                 </h2>
                 <div class="content">
-                  {{ teaser }}
+                  {{# pheader }}
+                   {{{ . }}}
+                   {{/pheader}} 
+                   {{# teaser }}
+                   {{{ . }}}
+                   {{/teaser}} 
                   <div class="field field--label-above">
                     <div class="field--label">Tags</div>
                     <div class="field--items tags">
@@ -128,15 +138,14 @@
 </div>
 
 <!--Wrapper-->
-<script src="{{ publishDir }}/static/js/bootstrap.min.js"></script>
-<script src="{{ publishDir }}/static/js/jquery-3.js"></script>
+<script type="text/javascript" src="{{ publishDir }}/static/cpager/js/cPager.js"></script>
 {{#pager}}
   <script type="text/javascript">
     $(document).ready(function() {    	
       $(this).cPager({
         pageSize: {{perPageItem}},
         pageid: "pager",
-        itemClass: "unpinned-item"
+        itemClass: "blog-list-items"
       });
     });
   </script>
