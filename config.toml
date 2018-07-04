@@ -1,7 +1,7 @@
 siteName = "Tamahagane"
 theme = "HR_Publisher"
 disqusShortname = ""
-BuilPath = "/path-to-hrocket-directory/hrocket/docs"
+BuilPath = "/home/khurram/hrocket/docs"
 publishDir = ""
 logoLink = "/"
 

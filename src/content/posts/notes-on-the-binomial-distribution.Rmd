@@ -11,8 +11,6 @@ tags: "Binomial, Statistics, Probability, Elementary"
 
 Binomial distribution describes the number of successes in a series of $n$ independent identical experiments: $X=k$ if exactly $k$ experiments out of $n$ were successfull, while others were not.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6A5EpqqDOdk" frameborder="0" allowfullscreen></iframe>
-
 Parameters: $n$ -- number of experiments, $p$ -- probability of a success in a single experiment.
 
 Values: $\{0,1,2,\ldots,n\}.$

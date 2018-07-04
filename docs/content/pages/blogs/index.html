@@ -190,15 +190,168 @@ $(document).ready(function () {
 </script>
           <div class="posts-list posts-list-pinned text-left">
             <!--wrap single list item into a container-->
-              <article role="article" class="article is-promoted teaser clearfix  post-item-pinned">
+              <article role="article" class="article is-promoted teaser clearfix  post-item-pinned blog-list-items">
                 <h2 class="post-title">
                   <a href="/content/posts/notes-on-bernoulli-distribution" rel="bookmark"><span
                           property="schema:name">Notes on the Bernoulli distribution</span></a>
                 </h2>
                 
                 <div class="content">
-                  Bernoulli distribution describes an outcome of a single experiment with two possible outcomes (success or failure): $X=1$ if an experiment was successfull, $X=0$ if it was not.
-Parameter $p$ -- probability of a success.
+                  <meta charset="utf-8">
+
+                  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+                  <meta name="generator" content="pandoc">
+
+                  <script src="/static/jquery-1.11.3/jquery.min.js"></script>
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                  <link href="/static/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+                  <script src="/static/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+                  <script src="/static/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+                  <script src="/static/bootstrap-3.3.5/shim/respond.min.js"></script>
+                  <script src="/static/navigation-1.1/tabsets.js"></script>
+                  <link href="/static/highlightjs-9.12.0/default.css" rel="stylesheet">
+
+                  <script src="/static/highlightjs-9.12.0/highlight.js"></script>
+                  <style type="text/css">code{white-space: pre;}</style>
+
+                  <style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+                  <script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+                  <style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+                  
+                  <style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+                  <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script><!-- code folding --><div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Notes on the Bernoulli distribution</h1>
+<h4 class="date"><em>15.02.2018</em></h4>
+
+</div>
+
+
+<p>Bernoulli distribution describes an outcome of a single experiment with two possible outcomes (success or failure): <span class="math inline">\(X=1\)</span> if an experiment was successfull, <span class="math inline">\(X=0\)</span> if it was not.</p>
+<p>Parameter: <span class="math inline">\(p\)</span> – probability of a success.</p>
+<p>Values: <span class="math inline">\(\{0,1\}.\)</span></p>
+<p>Probability mass function: <span class="math display">\[
+P(X=1)=p, \ P(X=0)=1-p.
+\]</span></p>
+<p>Moment generating function: <span class="math display">\[
+M(t)=1-p+pe^t
+\]</span></p>
+<div id="proof" class="section level3">
+<h3>Proof</h3>
+<p><span class="math display">\[
+M(t)=Ee^{tX}=e^t\cdot P(X=1)+e^0\cdot P(X=0)=pe^t+1-p
+\]</span></p>
+<p>All moments: <span class="math display">\[
+EX^n=p, \ n\geq 1.
+\]</span></p>
+</div>
+<div id="proof-1" class="section level3">
+<h3>Proof</h3>
+<p>Observe that <span class="math inline">\(X^n=X,\)</span> for <span class="math inline">\(n\geq 1.\)</span> Further, <span class="math display">\[
+EX=1\cdot P(X=1)+0\cdot P(X=0)=p+0=p
+\]</span></p>
+<p>Expectation: <span class="math inline">\(EX=p\)</span></p>
+<p>Variance: <span class="math inline">\(V(X)=p(1-p)\)</span></p>
+</div>
+
+
+
+
+</div>
+
+                  <script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+                  <script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
                   <div class="field field--label-above">                    
                     <div class="field--items tags">
                       <i class="fas fa-folder-open"></i>  <span class="field--item tag"> #Bernoulli</span>  <span class="field--item tag"> # Statistics</span>  <span class="field--item tag"> # Probability</span>  <span class="field--item tag"> # Elementary</span> 
@@ -211,14 +364,177 @@ Parameter $p$ -- probability of a success.
           </div>
           <div class="posts-list posts-list-unpinned text-left">
             <!--wrap single list item into a container-->
-              <article role="article" class="article is-promoted teaser clearfix unpinned-item">
+              <article role="article" class="article is-promoted teaser clearfix unpinned-item blog-list-items">
                 <h2>
                   <a href="/content/posts/notes-on-the-binomial-distribution" rel="bookmark"><span
                           property="schema:name">Notes on the Binomial distribution</span></a>
                 </h2>
                 <div class="content">
-                  Binomial distribution describes the number of successes in a series of $n$ independent identical experiments: $X=k$ if exactly $k$ experiments out of $n$ were successfull, while others were not.
-Parameters: $n$ -- number of experiments, $p$ -- probability of a success in a single experiment.
+                   <meta charset="utf-8">
+
+                   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+                   <meta name="generator" content="pandoc">
+
+                   <script src="/static/jquery-1.11.3/jquery.min.js"></script>
+                   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                   <link href="/static/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+                   <script src="/static/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+                   <script src="/static/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+                   <script src="/static/bootstrap-3.3.5/shim/respond.min.js"></script>
+                   <script src="/static/navigation-1.1/tabsets.js"></script>
+                   <link href="/static/highlightjs-9.12.0/default.css" rel="stylesheet">
+
+                   <script src="/static/highlightjs-9.12.0/highlight.js"></script>
+                   <style type="text/css">code{white-space: pre;}</style>
+
+                   <style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+                   <script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+                   <style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+                   
+                   <style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+                   <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script><!-- code folding --><div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Notes on the Binomial distribution</h1>
+<h4 class="date"><em>15.02.2018</em></h4>
+
+</div>
+
+
+<p>Binomial distribution describes the number of successes in a series of <span class="math inline">\(n\)</span> independent identical experiments: <span class="math inline">\(X=k\)</span> if exactly <span class="math inline">\(k\)</span> experiments out of <span class="math inline">\(n\)</span> were successfull, while others were not.</p>
+<p>Parameters: <span class="math inline">\(n\)</span> – number of experiments, <span class="math inline">\(p\)</span> – probability of a success in a single experiment.</p>
+<p>Values: <span class="math inline">\(\{0,1,2,\ldots,n\}.\)</span></p>
+<p>Probability mass function: <span class="math display">\[
+P(X=k)={n\choose k}p^k(1-p)^{n-k}, \ k=0,1,2,\ldots,n.
+\]</span></p>
+<div id="derivation" class="section level3">
+<h3>Derivation</h3>
+<p>Let <span class="math inline">\(\xi_k,\)</span> <span class="math inline">\(k=1,2,\ldots,n,\)</span> be the result of <span class="math inline">\(k\)</span>-th experiment, i.e. <span class="math inline">\(\xi_k=1\)</span> if <span class="math inline">\(k\)</span>-th experiment was successfull, and <span class="math inline">\(\xi_k=0\)</span> otherwise. Then <span class="math display">\[
+X=\xi_1+\xi_2+\ldots+\xi_n,
+\]</span> By assumption, <span class="math inline">\(\xi_1,\ldots,\xi_n\)</span> are independent and each has a Bernoulli distribution with parameter <span class="math inline">\(p.\)</span> Event <span class="math inline">\(\{X=k\}\)</span> means that exactly <span class="math inline">\(k\)</span> variables of <span class="math inline">\(\xi_1\ldots,\xi_n\)</span> equal to <span class="math inline">\(1\)</span> and others are equal to <span class="math inline">\(0.\)</span> There are <span class="math inline">\({n\choose k}\)</span> possibilities to choose variables that are equal to <span class="math inline">\(1.\)</span> Each of them is <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p,\)</span> other <span class="math inline">\(n-k\)</span> variables are <span class="math inline">\(0\)</span> each with probability <span class="math inline">\(1-p.\)</span></p>
+<p>Moment generating function: <span class="math display">\[
+M(t)=(1-p+pe^t)^n
+\]</span></p>
+</div>
+<div id="proof" class="section level3">
+<h3>Proof</h3>
+<p><span class="math display">\[
+M(t)=Ee^{t(\xi_1+\ldots+\xi_n)}=
+\]</span> using independence <span class="math display">\[
+=Ee^{t\xi_1}Ee^{t\xi_2}\ldots Ee^{t\xi_n}=(pe^t+1-p)^n
+\]</span></p>
+<p>Expectation: <span class="math inline">\(EX=np\)</span></p>
+<p>Variance: <span class="math inline">\(V(X)=np(1-p)\)</span></p>
+</div>
+<div id="derivation-1" class="section level3">
+<h3>Derivation</h3>
+<p>Expectation is the first derivative <span class="math inline">\(M'(0).\)</span> We have <span class="math display">\[
+M'(t)=n(pe^t+1-p)^{n-1}pe^t, \ EX=M'(0)=np.
+\]</span> Second moment is the second derivative <span class="math inline">\(M''(0).\)</span> We have <span class="math display">\[
+M''(t)=n(n-1)(pe^t+1-p)^{n-1}p^2e^{2t}+n(pe^t+1-p)^{n-1}pe^t, \]</span> <span class="math display">\[
+ EX^2=M''(0)=n(n-1)p^2+np.
+\]</span> Variance is <span class="math display">\[
+V(X)=EX^2-(EX)^2=n(n-1)p^2+np-n^2p^2=np(1-p)
+\]</span></p>
+</div>
+
+
+
+
+</div>
+
+                   <script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+                   <script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
                   <div class="field field--label-above">
                     <div class="field--label">Tags</div>
                     <div class="field--items tags">
@@ -244,8 +560,7 @@ Parameters: $n$ -- number of experiments, $p$ -- probability of a success in a s
 </div>
 
 <!--Wrapper-->
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/jquery-3.js"></script>
+<script type="text/javascript" src="/static/cpager/js/cPager.js"></script>
 </body>
 </html>
 
