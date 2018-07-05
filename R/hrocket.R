@@ -63,12 +63,15 @@ if (length(args) > 0) {
 theme <- paste(HRroot,"/themes/", tomlConfig.list$theme, sep = "")
 theme.static.folder <- paste(theme, "/static", sep = "")
 
-
 # copy themes static file in public directory
 if (!dir.exists(paste(BuildPath,"/static", sep = ""))) {
   file.copy(theme.static.folder, paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)
 }
 
+# copy images to public directory
+if (!dir.exists(paste(BuildPath,"/images", sep = ""))) {
+  file.copy(paste(HRroot, "/src/images", sep = "" ), paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)
+}
 
 # create index.html
 if (!file.exists(paste(BuildPath,"/index.html", sep = ""))) {
