@@ -1,3 +1,7 @@
+## Embedding images
+For embedding images put your images at "src/images" directory<br /> 
+Then in your Rmd files embed image as per images section on following link<br />
+https://rmarkdown.rstudio.com/authoring_basics.html 
 
 ## Blog listing page (Full content or Teaser)
 For showing full content or teaser on blog listing page there is an option for setting in "src/content/blogs_list/blogs.Rmd"<br />
