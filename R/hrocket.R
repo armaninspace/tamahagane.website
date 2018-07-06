@@ -224,7 +224,6 @@ if(length(posts) > 0) {
   # Check if something change in site
   # If TRUE than have to rebuild blogs page to update blogs list
   if (structureChanged) {
-    
     # Print some Log where is script running
     print("Creating blogs page")
     
@@ -318,10 +317,6 @@ if(length(posts) > 0) {
       }
     }
 
-    
-    
-    
-    
     # Get mustache template's content
     postTemplate <- readLines(paste(theme, "/templates/posts_list.mustache", sep = ""))
     
@@ -353,7 +348,6 @@ if(length(posts) > 0) {
     #paste(BuildPath, "/index.html", sep = ""))
   }
 }
-
 
 if(!structureChanged){
   print("Nothing to update.")
