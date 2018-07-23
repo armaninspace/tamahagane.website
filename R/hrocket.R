@@ -29,6 +29,7 @@ if (length(args) > 0) {
   
   #Get configration from config
   tomlConfig.list <- read.config(paste(HRroot,"/config.toml", sep = ""))
+  pubDir <- tomlConfig.list$publishDir
   
   # Check config variable @buildpath to set static site generation directory
   if (tomlConfig.list$BuilPath != 'ROOT') {
@@ -84,7 +85,7 @@ if (!file.exists(paste(BuildPath,"/index.html", sep = ""))) {
   structureChanged <- TRUE
   
   # Render index.RMD
-  markdownIndexOutput <- markDownReader(BuildPath, HRroot ,"index.Rmd", page = FALSE, post = FALSE, index = TRUE, blogs = FALSE)
+  markdownIndexOutput <- markDownReader(pubDir, BuildPath, HRroot ,"index.Rmd", page = FALSE, post = FALSE, index = TRUE, blogs = FALSE)
   # Get mustache template's content
   pageTemplate <- readLines(paste(theme, "/templates/index.mustache", sep = ""))
   
@@ -99,6 +100,8 @@ if (!file.exists(paste(BuildPath,"/index.html", sep = ""))) {
                 , title  = markdownIndexOutput$ptitle
                 , publishDir  = tomlConfig.list$publishDir
                 , logoLink  = tomlConfig.list$logoLink
+                , metaKeywords  = tomlConfig.list$metaKeywords
+                , googleAnalyticsTrackingId  = tomlConfig.list$googleAnalyticsTrackingId
   )
   
   # Print some Log where is script running
@@ -127,7 +130,7 @@ if(length(pages) > 0){
       structureChanged <- TRUE
       
       # Render page RMD file
-      output <- markDownReader(BuildPath, HRroot, pages[[i]], page = TRUE, post = FALSE, index = FALSE, blogs=FALSE)
+      output <- markDownReader(pubDir, BuildPath, HRroot, pages[[i]], page = TRUE, post = FALSE, index = FALSE, blogs=FALSE)
       
       # Get mustache template's content
       pageTemplate <- readLines(paste(theme, "/templates/page.mustache", sep = ""))
@@ -142,6 +145,8 @@ if(length(pages) > 0){
                    , title = output$ptitle
                    , publishDir  = tomlConfig.list$publishDir
                    , logoLink  = tomlConfig.list$logoLink
+                   , metaKeywords  = tomlConfig.list$metaKeywords
+                   , googleAnalyticsTrackingId  = tomlConfig.list$googleAnalyticsTrackingId
       )
       
       # Print some Log where is script running
@@ -176,7 +181,7 @@ if(length(posts) > 0) {
       structureChanged <- TRUE
       
       # Render post RMD file
-      output <- markDownReader(BuildPath, HRroot, posts[[i]], page = FALSE, post = TRUE, index = FALSE, blogs = FALSE)
+      output <- markDownReader(pubDir, BuildPath, HRroot, posts[[i]], page = FALSE, post = TRUE, index = FALSE, blogs = FALSE)
       
       # Get mustache template's content
       postTemplate <- readLines(paste(theme, "/templates/post.mustache", sep = ""))
@@ -209,6 +214,8 @@ if(length(posts) > 0) {
                    , postDate = postsYamlHeader$date
                    , publishDir  = tomlConfig.list$publishDir
                    , logoLink  = tomlConfig.list$logoLink
+                   , metaKeywords  = tomlConfig.list$metaKeywords
+                   , googleAnalyticsTrackingId  = tomlConfig.list$googleAnalyticsTrackingId
       )
       
       # Print some Log where is script running
@@ -270,7 +277,7 @@ if(length(posts) > 0) {
         finalPinnedPosts[[s]] <- as.list(tmp.pinned[[s]])
         finalPinnedPosts[[s]]$tags <- strsplit(finalPinnedPosts[[s]]$tags, ",")[[1]] 
         if (blogYamlinfo$teaser == "full") {
-          output1 <- markDownReader1(BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalPinnedPosts[[s]]$rawFileName)
+          output1 <- markDownReader1(pubDir, BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalPinnedPosts[[s]]$rawFileName)
           finalPinnedPosts[[s]]$teaser <- output1$body
           finalPinnedPosts[[s]]$pheader <- output1$header
         }
@@ -281,7 +288,7 @@ if(length(posts) > 0) {
     if (file.exists(paste(HRroot, "/src/content/blogs_list/blogs.Rmd", sep = ""))) {
       
       # Render blogs.RMD file
-      blogsOutput <- markDownReader(BuildPath, HRroot, "blogs.Rmd", page = FALSE, post = FALSE, index = FALSE, blogs = TRUE)
+      blogsOutput <- markDownReader(pubDir, BuildPath, HRroot, "blogs.Rmd", page = FALSE, post = FALSE, index = FALSE, blogs = TRUE)
       
       # Get header configurations
       blogYaml <- readRMDyamlHeaders(paste(HRroot,"/src/content/blogs_list/blogs.Rmd", sep = ""), "blogs")
@@ -307,7 +314,7 @@ if(length(posts) > 0) {
         finalUnPinnedPosts[[s]] <- as.list(tmp.unpinned[[s]])
         finalUnPinnedPosts[[s]]$tags <- strsplit(finalUnPinnedPosts[[s]]$tags, ",")[[1]]
         if (blogYamlinfo$teaser == "full") {
-          output1 <- markDownReader1(BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalUnPinnedPosts[[s]]$rawFileName)
+          output1 <- markDownReader1(pubDir, BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalUnPinnedPosts[[s]]$rawFileName)
           finalUnPinnedPosts[[s]]$teaser <- output1$body
           finalUnPinnedPosts[[s]]$pheader <- output1$header
         }
@@ -335,6 +342,8 @@ if(length(posts) > 0) {
                  , pager = pager
                  , publishDir  = tomlConfig.list$publishDir
                  , logoLink  = tomlConfig.list$logoLink
+                 , metaKeywords  = tomlConfig.list$metaKeywords
+                 , googleAnalyticsTrackingId  = tomlConfig.list$googleAnalyticsTrackingId
     )
     
     # create blogs directory if not exist
@@ -348,6 +357,26 @@ if(length(posts) > 0) {
     #paste(BuildPath, "/index.html", sep = ""))
   }
 }
+
+siteurl <- tomlConfig.list$siteUrl
+xmlstart <- "<?xml version='1.0' encoding='UTF-8'?>
+  <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>"
+xmlloc <- "<url><loc>"
+xmllocend <- "</loc></url>"
+xmlend <-"</urlset>"
+dirs <- list.dirs(paste(BuildPath, "/content", sep = ""))
+xmlcontent <- ''
+for (el in dirs) {
+  if ((grepl("^.*\\_files$", el) == FALSE) && (grepl("^.*\\/figure-html$", el) == FALSE)
+      && (grepl("^.*\\/posts$", el) == FALSE) && (grepl("^.*\\/pages$", el) == FALSE) && 
+      (grepl("^.*\\/content$", el) == FALSE)) {
+    
+    xmlcontent <- paste(xmlcontent, paste(xmlloc, siteurl, gsub(BuildPath, "", el) , xmllocend, sep = ""))
+    
+  }
+}
+
+cat( paste(xmlstart, xmlcontent , xmlend, sep = ""), file=paste(BuildPath, "/sitemap.xml", sep = ""))
 
 if(!structureChanged){
   print("Nothing to update.")

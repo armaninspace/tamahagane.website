@@ -1,9 +1,12 @@
 siteName = "Tamahagane"
 theme = "HR_Publisher"
 disqusShortname = ""
-BuilPath = "/path-to-hrocket-directory/hrocket/docs"
+BuilPath = "/home/your-username/hrocket/docs"
 publishDir = ""
 logoLink = "/"
+metaKeywords = "HTML, CSS, XML, XHTML, JavaScript"
+googleAnalyticsTrackingId = "UA-232232-34"
+siteUrl = "http://example.com"
 
 [[mainMenu]]
   name = "Home"

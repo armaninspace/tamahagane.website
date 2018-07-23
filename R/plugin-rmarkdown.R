@@ -11,7 +11,7 @@
 #' @param blogs boolean TURE if RMD is blogs.RMD
 #' @return list of html content
 
-markDownReader <- function(buildPath, HRroot, fileName, pageToRead = FALSE, postToRead = FALSE, index = FALSE, blogs = FALSE) {
+markDownReader <- function(pubDir, buildPath, HRroot, fileName, pageToRead = FALSE, postToRead = FALSE, index = FALSE, blogs = FALSE) {
   rawFileName <- strsplit(fileName, "[.]")[[1]][[1]]
   filePath <- ""
   outputPath <- ""
@@ -83,10 +83,10 @@ markDownReader <- function(buildPath, HRroot, fileName, pageToRead = FALSE, post
       
     } else {
       if (!is.na( xml_attr(script,"src"))) {
-        xml_set_attr(script, "src", gsub(paste(rawFileName, "_files", sep = ""), "/static", xml_attr(script, "src")))
+        xml_set_attr(script, "src", gsub(paste(rawFileName, "_files", sep = ""), paste(pubDir, "/static", sep = ''), xml_attr(script, "src")))
       }
       if (!is.na(xml_attr(script,"href"))) {
-        xml_set_attr(script, "href", gsub(paste(rawFileName, "_files", sep = ""), "/static", xml_attr(script, "href")))
+        xml_set_attr(script, "href", gsub(paste(rawFileName, "_files", sep = ""), paste(pubDir, "/static", sep = ''), xml_attr(script, "href")))
       }
       mustacheHeader[headCounter] <- as.character(script)
       headCounter <- headCounter+1
@@ -157,7 +157,7 @@ readRMDyamlHeaders <- function(file, rawFileName = "") {
 }
 
 
-markDownReader1 <- function(BuildPath, filePath, rawFileName) {
+markDownReader1 <- function(pubDir, BuildPath, filePath, rawFileName) {
   # For droping figures to blogs directory
   outputPath <- paste(BuildPath,"/content/pages/blogs/", sep = "")
   # patch For droping figures to public directory
@@ -207,10 +207,10 @@ markDownReader1 <- function(BuildPath, filePath, rawFileName) {
       
     } else {
       if (!is.na( xml_attr(script,"src"))) {
-        xml_set_attr(script, "src", gsub(paste(rawFileName, "_files", sep = ""), "/static", xml_attr(script, "src")))
+        xml_set_attr(script, "src", gsub(paste(rawFileName, "_files", sep = ""), paste(pubDir, "/static", sep = ''), xml_attr(script, "src")))
       }
       if (!is.na(xml_attr(script,"href"))) {
-        xml_set_attr(script, "href", gsub(paste(rawFileName, "_files", sep = ""), "/static", xml_attr(script, "href")))
+        xml_set_attr(script, "href", gsub(paste(rawFileName, "_files", sep = ""), paste(pubDir, "/static", sep = ''), xml_attr(script, "href")))
       }
       mustacheHeader[headCounter] <- as.character(script)
       headCounter <- headCounter+1

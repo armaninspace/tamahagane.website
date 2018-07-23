@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ googleAnalyticsTrackingId }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ googleAnalyticsTrackingId }}');
+</script>
   <meta charset="utf-8">
   <meta name="MobileOptimized" content="width">
   <meta name="HandheldFriendly" content="true">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="{{ metaKeywords }}">
   <title>{{ siteName }} | {{ title }}</title>
 
   {{# headers }}
     {{{ . }}}
   {{/ headers }}
 
-  <link rel="shortcut icon" href="{{ publishDir }}/static/images/{{favIcon.url}}" type="image/vnd.microsoft.icon">
-  <link rel="stylesheet" href="{{ publishDir }}/static/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="{{ publishDir }}/static/images/{{favIcon.url}}" type="image/vnd.microsoft.icon">  
   <link rel="stylesheet" href="{{ publishDir }}/static/css/styles.css" media="all">
   <link rel="stylesheet" href="{{ publishDir }}/static/css/responsive.css">
   <link rel="stylesheet" href="{{ publishDir }}/static/css/fontawesome/css/fontawesome-all.min.css">
