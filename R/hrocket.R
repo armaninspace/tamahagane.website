@@ -367,12 +367,11 @@ xmlend <-"</urlset>"
 dirs <- list.dirs(paste(BuildPath, "/content", sep = ""))
 xmlcontent <- ''
 for (el in dirs) {
-  if ((grepl("^.*\\_files$", el) == FALSE) && (grepl("^.*\\/figure-html$", el) == FALSE)
-      && (grepl("^.*\\/posts$", el) == FALSE) && (grepl("^.*\\/pages$", el) == FALSE) && 
-      (grepl("^.*\\/content$", el) == FALSE)) {
-    
-    xmlcontent <- paste(xmlcontent, paste(xmlloc, siteurl, gsub(BuildPath, "", el) , xmllocend, sep = ""))
-    
+  fils <- list.files(el)
+  for (htmfile in fils) {
+    if(htmfile == 'index.html') {
+      xmlcontent <- paste(xmlcontent, paste(xmlloc, siteurl, gsub(BuildPath, "", el) , xmllocend, sep = ""))
+    }
   }
 }
 
