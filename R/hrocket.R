@@ -251,7 +251,7 @@ if(length(posts) > 0) {
     )
     
     blogYamlinfo <- readRMDyamlHeaders(paste(HRroot,"/src/content/blogs_list/blogs.Rmd", sep = ""), "blogs")
-    
+    bloghome <- blogYamlinfo$bloghome
     for (i in 1:length(postsRMDs)) {
       rawFileName <- strsplit(postsRMDs[[i]], "[.]")[[1]][[1]]
       postConfig <- readRMDyamlHeaders(paste(HRroot, "/src/content/posts/", postsRMDs[[i]], sep = ""), rawFileName)
@@ -277,7 +277,7 @@ if(length(posts) > 0) {
         finalPinnedPosts[[s]] <- as.list(tmp.pinned[[s]])
         finalPinnedPosts[[s]]$tags <- strsplit(finalPinnedPosts[[s]]$tags, ",")[[1]] 
         if (blogYamlinfo$teaser == "full") {
-          output1 <- markDownReader1(pubDir, BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalPinnedPosts[[s]]$rawFileName)
+          output1 <- markDownReader1(bloghome, pubDir, BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalPinnedPosts[[s]]$rawFileName)
           finalPinnedPosts[[s]]$teaser <- output1$body
           finalPinnedPosts[[s]]$pheader <- output1$header
         }
@@ -314,7 +314,7 @@ if(length(posts) > 0) {
         finalUnPinnedPosts[[s]] <- as.list(tmp.unpinned[[s]])
         finalUnPinnedPosts[[s]]$tags <- strsplit(finalUnPinnedPosts[[s]]$tags, ",")[[1]]
         if (blogYamlinfo$teaser == "full") {
-          output1 <- markDownReader1(pubDir, BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalUnPinnedPosts[[s]]$rawFileName)
+          output1 <- markDownReader1(bloghome, pubDir, BuildPath, paste(HRroot, "/src/content/posts/", sep = ""), finalUnPinnedPosts[[s]]$rawFileName)
           finalUnPinnedPosts[[s]]$teaser <- output1$body
           finalUnPinnedPosts[[s]]$pheader <- output1$header
         }
@@ -349,12 +349,18 @@ if(length(posts) > 0) {
     # create blogs directory if not exist
     #dir.create(paste(BuildPath, "/content/pages/blogs", sep = ""), showWarnings = FALSE)
     
-    # Create actual output file
-    writeLines(
-      whisker.render(postTemplate, data),
-      paste(BuildPath, "/content/pages/blogs/index.html", sep = ""))
-    # patch For making blog list as home page
-    #paste(BuildPath, "/index.html", sep = ""))
+    if(bloghome == 'true') {
+      # Create actual output file
+      # For making blog list as home page
+      writeLines(
+        whisker.render(postTemplate, data),
+        paste(BuildPath, "/index.html", sep = ""))
+    } else {
+      # Create actual output file
+      writeLines(
+        whisker.render(postTemplate, data),
+        paste(BuildPath, "/content/pages/blogs/index.html", sep = ""))
+    }
   }
 }
 

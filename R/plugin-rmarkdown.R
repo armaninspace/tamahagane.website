@@ -157,11 +157,13 @@ readRMDyamlHeaders <- function(file, rawFileName = "") {
 }
 
 
-markDownReader1 <- function(pubDir, BuildPath, filePath, rawFileName) {
-  # For droping figures to blogs directory
-  outputPath <- paste(BuildPath,"/content/pages/blogs/", sep = "")
-  # patch For droping figures to public directory
-  #outputPath <- BuildPath
+markDownReader1 <- function(bloghome, pubDir, BuildPath, filePath, rawFileName) {
+  if(bloghome == 'true') {
+    outputPath <- BuildPath
+  } else {
+    outputPath <- paste(BuildPath,"/content/pages/blogs/", sep = "")
+  }
+  
   # create new directory for new post in public directory if not exist
   dir.create(outputPath, showWarnings = FALSE)
   
