@@ -30,14 +30,21 @@ if (length(args) > 0) {
   #Get configration from config
   tomlConfig.list <- read.config(paste(HRroot,"/config.toml", sep = ""))
   pubDir <- tomlConfig.list$publishDir
-  
+  robotsAllow <- tomlConfig.list$robotsAllow
   # Check config variable @buildpath to set static site generation directory
   if (tomlConfig.list$BuilPath != 'ROOT') {
     BuildPath <- tomlConfig.list$BuilPath
   } else {
     BuildPath <- HRroot 
   }
-  
+  useragent <- "User-agent: * \n"
+  robotsture <- "Allow: / "
+  robotsfalse <- "Disallow: / "
+  if(robotsAllow == 'True') {
+    cat( paste(useragent, robotsture, sep = ""), file=paste(BuildPath, "/robots.txt", sep = ""))
+  }else{
+    cat( paste(useragent, robotsfalse, sep = ""), file=paste(BuildPath, "/robots.txt", sep = ""))
+  }
   # To check wants rebuild every thing or build only newly add RMDs 
   if (args[2] == "build-clean") {
     
