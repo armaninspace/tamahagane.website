@@ -58,7 +58,9 @@ if (length(args) > 0) {
         unlink(paste(BuildPath,"/content", sep = ""), recursive=TRUE)  
       }
       if(file.exists(paste(BuildPath,"/index.html", sep = ""))){
-        file.remove(paste(BuildPath,"/index.html", sep = ""))
+        if(file.remove(paste(BuildPath,"/index.html", sep = ""))) {
+          print("Removing existing website's files.")
+        }
       }
       
     }
@@ -73,12 +75,16 @@ theme.static.folder <- paste(theme, "/static", sep = "")
 
 # copy themes static file in public directory
 if (!dir.exists(paste(BuildPath,"/static", sep = ""))) {
-  file.copy(theme.static.folder, paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)
+  if(file.copy(theme.static.folder, paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)) {
+    print("Static files copied to static website's root.")
+  }
 }
 
 # copy images to public directory
 if (!dir.exists(paste(BuildPath,"/images", sep = ""))) {
-  file.copy(paste(HRroot, "/src/images", sep = "" ), paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)
+  if(file.copy(paste(HRroot, "/src/images", sep = "" ), paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)) {
+    print("Images copied to static website's root.")
+  }
 }
 
 # check index.Rmd exists or not
