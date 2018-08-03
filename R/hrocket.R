@@ -46,10 +46,12 @@ if (length(args) > 0) {
     cat( paste(useragent, robotsfalse, sep = ""), file=paste(BuildPath, "/robots.txt", sep = ""))
   }
   # To check wants rebuild every thing or build only newly add RMDs 
-  if (args[2] == "build-clean") {
-    
+  if (args[2] == "build-clean") {    
     # Get parameter @build-clean 
     # Remove old static site content
+    if (dir.exists(paste(BuildPath,"/images", sep = ""))) {
+      unlink(paste(BuildPath,"/images", sep = ""), recursive=TRUE)
+    }
     if (dir.exists(paste(BuildPath,"/static", sep = ""))) {
       buildClean <- TRUE
       unlink(paste(BuildPath,"/static", sep = ""), recursive=TRUE)
@@ -76,14 +78,14 @@ theme.static.folder <- paste(theme, "/static", sep = "")
 # copy themes static file in public directory
 if (!dir.exists(paste(BuildPath,"/static", sep = ""))) {
   if(file.copy(theme.static.folder, paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)) {
-    print("Static files copied to static website's root.")
+    print("Copying assets(css, js etc) files to website's root.")
   }
 }
 
 # copy images to public directory
 if (!dir.exists(paste(BuildPath,"/images", sep = ""))) {
   if(file.copy(paste(HRroot, "/src/images", sep = "" ), paste(BuildPath,"/", sep = "") , overwrite = TRUE, recursive=TRUE)) {
-    print("Images copied to static website's root.")
+    print("Copying images to website's root.")
   }
 }
 
